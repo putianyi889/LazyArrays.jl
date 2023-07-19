@@ -295,6 +295,8 @@ MemoryLayout(::Type{ApplyArray{T,N,F,Args}}) where {T,N,F,Args} =
 @inline Applied(A::AbstractArray) = Applied(call(A), arguments(A)...)
 @inline ApplyArray(A::AbstractArray) = ApplyArray(call(A), arguments(A)...)
 
+@inline ArrayLayouts.lazyview(::Type{<:AbstractLazyLayout}, A, k...) = A[k...]
+
 function show(io::IO, A::Applied)
     print(io, "Applied(", A.f)
     for a in A.args
